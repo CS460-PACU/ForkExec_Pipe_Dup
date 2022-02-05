@@ -25,6 +25,66 @@
       "preLaunchTask": "runMake", // THIS IS IMPORTANT
     },
     {
+      "name": "(gdb) CS460_Fork_Exec", // Change name
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/bin/CS460_Fork_Exec", // THIS IS IMPORTANT
+      "args": [], // add comma separated list of args here.
+      "stopAtEntry":  true, // THIS IS IMPORTANT 
+      "cwd": "${fileDirname}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "setupCommands": [
+          {
+              "description": "Enable pretty-printing for gdb",
+              "text": "-enable-pretty-printing",
+              "ignoreFailures": true
+          }
+      ],
+      "preLaunchTask": "runMake", // THIS IS IMPORTANT
+    },
+    {
+      "name": "(gdb) CS460_Fork_ParentChild", // Change name
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/bin/CS460_Fork_ParentChild", // THIS IS IMPORTANT
+      "args": [], // add comma separated list of args here.
+      "stopAtEntry":  true, // THIS IS IMPORTANT 
+      "cwd": "${fileDirname}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "setupCommands": [
+          {
+              "description": "Enable pretty-printing for gdb",
+              "text": "-enable-pretty-printing",
+              "ignoreFailures": true
+          }
+      ],
+      "preLaunchTask": "runMake", // THIS IS IMPORTANT
+    },
+    {
+      "name": "(gdb) CS460_Fork_Pipe", // Change name
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/bin/CS460_Fork_Pipe", // THIS IS IMPORTANT
+      "args": [], // add comma separated list of args here.
+      "stopAtEntry":  true, // THIS IS IMPORTANT 
+      "cwd": "${fileDirname}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "setupCommands": [
+          {
+              "description": "Enable pretty-printing for gdb",
+              "text": "-enable-pretty-printing",
+              "ignoreFailures": true
+          }
+      ],
+      "preLaunchTask": "runMake", // THIS IS IMPORTANT
+    },
+    {
       "name": "(gdb) dup2_example",
       "type": "cppdbg",
       "request": "launch",
