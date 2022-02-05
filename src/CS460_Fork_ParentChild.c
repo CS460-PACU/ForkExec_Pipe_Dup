@@ -24,17 +24,20 @@
 
 int main()
 {
-
   pid_t childPid;
-  
+  int status;
+
   childPid = fork();
 
-  // exit if fork fails
-  if(-1 == childPid)
+  if ( 0 == childPid)
   {
-    perror("Fork failed");
-    return -1;
+    printf("I am a child\n");  
   }
-  printf("Other PID: %d My PID: %d\n", childPid, getpid());
-
+  else
+  {
+    waitpid(childPid, &status, 0);
+    printf("I am a parent\n");
+  }
+  
+  
 }

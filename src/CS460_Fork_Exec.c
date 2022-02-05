@@ -26,15 +26,24 @@ int main()
 {
 
   pid_t childPid;
-  
+  int status;
+  //char *aArgs[] = {"/usr/bin/ls", "-al", '\0'};
+  char *aArgs[] = {"/bin/ls", "-al", '\0'};
+
+
   childPid = fork();
 
-  // exit if fork fails
-  if(-1 == childPid)
+  if ( 0 == childPid)
   {
-    perror("Fork failed");
-    return -1;
+    execv(aArgs[0], aArgs);
+    perror("execv");
+    printf("I WILL NEVER PRINT\n");  
   }
-  printf("Other PID: %d My PID: %d\n", childPid, getpid());
-
+  else
+  {
+    waitpid(childPid, &status, 0);
+    printf("\nI am a parent\n");
+  }
+  
+  
 }

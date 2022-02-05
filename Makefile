@@ -12,28 +12,17 @@ CFLAGS=-g -Wall
 
 .PHONY: all clean
 
-TARGETS=bin/CS460_Fork bin/dup2_example
+TARGETS=bin/CS460_Fork bin/CS460_Fork_ParentChild bin/CS460_Fork_Exec bin/CS460_Fork_Pipe bin/dup2_example
 all: bin ${TARGETS}
 
 bin:
 	mkdir -p bin
 
-bin/CS460_Fork: bin/CS460_Fork.o
-	${CC} ${CFLAGS} -o bin/CS460_Fork bin/CS460_Fork.o
-        
-bin/CS460_Fork.o: src/CS460_Fork.c
-	${CC} ${CFLAGS} -c -o bin/CS460_Fork.o src/CS460_Fork.c 
+bin/%: bin/%.o
+	gcc -o $@ -g -Wall $^
 
-bin/dup2_example: bin/dup2_example.o
-	${CC} ${CFLAGS} -o bin/dup2_example bin/dup2_example.o
-        
-bin/dup2_example.o: src/dup2_example.c
-	${CC} ${CFLAGS} -c -o bin/dup2_example.o src/dup2_example.c 
+bin/%.o: src/%.c bin
+	gcc -c -o $@ -g -Wall $<
 
 clean:
-	rm -f bin/*.o ${TARGETS}
-
-printMain:
-	enscript -C -T 2 -p - -M Letter -Ec --color -fCourier8 src/CS460_Fork.c  | ps2pdf - bin/CS460_Fork.pdf 
-	enscript -C -T 2 -p - -M Letter -Ec --color -fCourier8 src/dup2_example.c  | ps2pdf - bin/dup2_example.pdf 
-
+	rm -f bin/*

@@ -25,16 +25,36 @@
 int main()
 {
 
+  const int READ = 0;
+  const int WRITE = 1;
+  int value = 42;
+
   pid_t childPid;
-  
+  int status;
+  int thePipe[2];
+
+  pipe(thePipe);
+
   childPid = fork();
 
-  // exit if fork fails
-  if(-1 == childPid)
+  if( 0 == childPid) 
   {
-    perror("Fork failed");
-    return -1;
-  }
-  printf("Other PID: %d My PID: %d\n", childPid, getpid());
+    write(thePipe[WRITE], &value, sizeof(int));
+    close(thePipe[WRITE]);
 
+    printf("I am a child\n");
+  }
+  else
+  {
+    close(thePipe[WRITE]);
+    value = 0;
+    read(thePipe[READ], &value, sizeof(int));
+  
+    printf("VALUE: %d\n", value);
+
+    waitpid(childPid, &status, 0);
+    printf("I am a parent\n");
+  }
+
+  close(thePipe[READ]);
 }
